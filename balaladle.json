@@ -1,0 +1,11 @@
+{
+  "id": "Balaladle",
+  "name": "Balaladle",
+  "author": ["Impykins"],
+  "description": "",
+  "priority": 10000005,
+  "prefix": "impy",
+  "dependencies": ["Steamodded (>=1.0.0~ALPHA-0812d)"],
+  "main_file": "main.lua",
+  "version": "0.0.1"
+}
