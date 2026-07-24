@@ -1,3 +1,5 @@
+local ui_utils = assert(SMODS.load_file("src/utils/ui.lua"))()
+
 if SMODS.Mods["Multiplayer"] and SMODS.Mods["Multiplayer"].can_load
    and G.UIDEF.override_main_menu_play_button and G.FUNCS.play_options then
     sendDebugMessage("Multiplayer compatibility detected", "BALALADLE")
@@ -34,7 +36,7 @@ if SMODS.Mods["Multiplayer"] and SMODS.Mods["Multiplayer"].can_load
 
         G.FUNCS.start_challenge_run({
             config = {
-                id = "c_impy_daily_1",
+                id = ui_utils.get_challenge_index("c_impy_daily_1"),
             },
         })
     end
