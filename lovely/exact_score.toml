@@ -1,0 +1,22 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Hacky solution, fix later so that the blind req doesn't actually change
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+if G.GAME.chips - G.GAME.blind.chips >= 0 or 
+   G.GAME.current_round.hands_left < 1 then
+'''
+position = "before"
+payload = '''
+if G.GAME.modifiers.impy_exact_score
+    and G.GAME.chips > G.GAME.blind.chips
+then
+    G.GAME.blind.chips = G.GAME.chips + 1
+    G.GAME.current_round.hands_left = 0
+end
+'''
+match_indent = true

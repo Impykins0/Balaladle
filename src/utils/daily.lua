@@ -1,6 +1,6 @@
-local M = {}
+local seed = tonumber(os.date("!%Y%m%d"))
 
-M.banned_cards = {
+local banned_jokers = {
     "j_perkeo",
     "j_chicot",
     "j_astronomer",
@@ -48,14 +48,14 @@ M.banned_cards = {
     "j_four_fingers",
 }
 
-M.rng_usable_cards = {
+local rng_usable_jokers = {
     "j_business",
     "j_bloodstone",
     "j_reserved_parking",
     "j_oops"
 }
 
-M.hand_usable_cards = {
+local hand_usable_jokers = {
     "j_trousers",
     "j_vampire",
     "j_card_sharp",
@@ -64,7 +64,7 @@ M.hand_usable_cards = {
     "j_supernova",
 }
 
-M.discard_usable_cards = {
+local discard_usable_jokers = {
     "j_burnt",
     "j_hit_the_road",
     "j_castle",
@@ -73,33 +73,47 @@ M.discard_usable_cards = {
     "j_faceless",
 }
 
-M.hand_size_usable_cards = {
+local hand_size_usable_jokers = {
     "j_turtle_bean",
     "j_juggler",
 }
 
-M.seed = tonumber(os.date("!%Y%m%d"))
+local card_dependent_usable_jokers = {
+    "j_stone",
+    "j_glass",
+    "j_steel_joker",
+}
 
-function M.get_banned_cards()
+local M = {}
+
+function M.get_seed()
+    return seed
+end
+
+function M.get_banned_jokers()
     local banned = {}
 
-    for _, card_id in pairs(M.banned_cards) do
+    for _, card_id in pairs(banned_jokers) do
         banned[#banned + 1] = { id = card_id }
     end
 
-    for _, card_id in pairs(M.rng_usable_cards) do
+    for _, card_id in pairs(rng_usable_jokers) do
         banned[#banned + 1] = { id = card_id }
     end
 
-    for _, card_id in pairs(M.hand_usable_cards) do
+    for _, card_id in pairs(hand_usable_jokers) do
         banned[#banned + 1] = { id = card_id }
     end
 
-    for _, card_id in pairs(M.discard_usable_cards) do
+    for _, card_id in pairs(discard_usable_jokers) do
         banned[#banned + 1] = { id = card_id }
     end
 
-    for _, card_id in pairs(M.hand_size_usable_cards) do
+    for _, card_id in pairs(hand_size_usable_jokers) do
+        banned[#banned + 1] = { id = card_id }
+    end
+
+    for _, card_id in pairs(card_dependent_usable_jokers) do
         banned[#banned + 1] = { id = card_id }
     end
 

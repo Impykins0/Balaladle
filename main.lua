@@ -1,7 +1,6 @@
 local file_paths = {
     "src/balaladle/challenge",
     "src/balaladle/rules",
-    "src/balaladle/jokers",
     "ui/play_button"
 }
 
