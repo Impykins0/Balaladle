@@ -1,6 +1,13 @@
 local daily_utils = assert(SMODS.load_file("src/utils/daily.lua"))()
 local misc_utils = assert(SMODS.load_file("src/utils/misc.lua"))()
 
+local editions = {
+    "foil",
+    "holo",
+    "polychrome",
+    false,
+}
+
 local M = {}
 
 function M.get_jokers(amount)
@@ -27,10 +34,18 @@ function M.get_jokers(amount)
     math.randomseed(daily_utils.get_seed())
 
     for i = 1, math.min(amount, #pool) do
-        selected[#selected + 1] = {
+        local edition = misc_utils.random_select(editions)
+
+        local joker = {
             id = misc_utils.random_select(pool),
             eternal = true,
         }
+
+        if edition then
+            joker.edition = edition
+        end
+
+        selected[#selected + 1] = joker
     end
 
     return selected

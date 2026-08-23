@@ -1,10 +1,18 @@
 return {
     descriptions = {
-        
+        Blind = {
+            bl_impy_blank = {
+                name = "The Blank",
+                text = {
+                    "Does nothing",
+                },
+            },
+        }
     },
     misc = {
         dictionary = {
             b_impy_daily_1 = "Balaladle",
+            ph_impy_score_exactly = "Score EXACTLY",
         },
         challenge_names = {
             c_impy_daily_1 = "Balaladle"
