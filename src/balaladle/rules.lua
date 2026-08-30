@@ -1,3 +1,5 @@
+local daily_score = BALALADLE.CORE.SCORE
+
 -- Skip directly to the boss blind + one ante only
 local start = Game.start_run
 function Game:start_run(args)
@@ -17,4 +19,16 @@ function Game:start_run(args)
             return true
         end,
     }))
+end
+
+-- Calculate exact blind score
+local blind_ref = Blind.set_blind
+function Blind:set_blind(blind, reset, silent)
+    blind_ref(self, blind, reset, silent)
+
+    if blind and G.GAME.modifiers.impy_final_score then
+        local score = daily_score.get_score()
+        self.chips = score
+        self.chip_text = number_format(score)
+    end
 end

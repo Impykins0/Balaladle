@@ -54,3 +54,21 @@ payload = '''
 },
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "{n=G.UIT.T, config={text = number_format(blind_amt), scale = score_number_scale(0.9, blind_amt), colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED, shadow =  not disabled}}"
+position = "at"
+payload = '''
+{n=G.UIT.T, config={
+        text = G.GAME.modifiers.impy_final_score and "???" 
+            or number_format(blind_amt),
+        scale = G.GAME.modifiers.impy_final_score and 0.7 
+            or score_number_scale(0.9, blind_amt),
+        colour = disabled and G.C.UI.TEXT_INACTIVE or G.C.RED,
+        shadow = not disabled
+    }
+}
+'''
+match_indent = true

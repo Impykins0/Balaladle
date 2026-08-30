@@ -1,8 +1,28 @@
-local ui_utils = assert(SMODS.load_file("src/utils/ui.lua"))()
+local ui_utils = BALALADLE.UTILS.UI
+local daily_utils = BALALADLE.UTILS.DAILY
+
+local challenge_ref = G.FUNCS.start_challenge_run
+G.FUNCS.start_challenge_run = function(e)
+    local id = ui_utils.get_challenge_index("c_impy_daily_1")
+
+    if e.config.id == id then
+        if G.OVERLAY_MENU then
+            G.FUNCS.exit_overlay_menu()
+        end
+
+        G.FUNCS.start_run(e, {
+            stake = 1,
+            seed = daily_utils.get_seed(),
+            challenge = G.CHALLENGES[id],
+        })
+
+        return
+    end
+
+    challenge_ref(e)
+end
 
 G.FUNCS.daily_start_1 = function(e)
-    G.FUNCS.exit_overlay_menu()
-
     G.FUNCS.start_challenge_run({
         config = {
             id = ui_utils.get_challenge_index("c_impy_daily_1"),
@@ -14,9 +34,9 @@ if SMODS.Mods["Multiplayer"] and SMODS.Mods["Multiplayer"].can_load
    and G.UIDEF.override_main_menu_play_button and G.FUNCS.play_options then
     sendDebugMessage("Multiplayer compatibility detected", "BALALADLE")
 
-    local ref = G.UIDEF.override_main_menu_play_button
+    local ui_ref = G.UIDEF.override_main_menu_play_button
     function G.UIDEF.override_main_menu_play_button()
-        local ui = ref()
+        local ui = ui_ref()
 
         if not G.SETTINGS.tutorial_complete
            or G.SETTINGS.tutorial_progress ~= nil then

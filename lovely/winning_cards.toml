@@ -1,0 +1,15 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "G.deck:emplace(_card)"
+position = "before"
+payload = '''
+if G.GAME.modifiers.impy_exact_score then
+    _card.params.impy_winning = control.impy_winning
+end
+'''
+match_indent = true
