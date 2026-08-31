@@ -67,16 +67,16 @@ local function simulate_cards(winning_hand, other_cards)
     return result.score.exact
 end
 
-if not BALALADLE.CORE.SCORE.get_score then
-    function BALALADLE.CORE.SCORE.get_score()
-        if not BALALADLE.CORE.SCORE.final_score then
+if not BALALADLE.CORE.SCORE.get_calculated_score then
+    function BALALADLE.CORE.SCORE.get_calculated_score()
+        if not BALALADLE.CORE.SCORE.calculated_score then
             local winning_hand = daily_deck.get_winning_hand()
             local other_cards = 
                 misc_utils.slice(daily_deck.get_other_cards(), 1, 5)
-            BALALADLE.CORE.SCORE.final_score = 
+            BALALADLE.CORE.SCORE.calculated_score = 
                 simulate_cards(winning_hand, other_cards)
         end
 
-        return BALALADLE.CORE.SCORE.final_score
+        return BALALADLE.CORE.SCORE.calculated_score
     end
 end

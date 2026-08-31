@@ -1,0 +1,31 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if G.GAME.chips - G.GAME.blind.chips >= 0 then"
+position = "at"
+payload = '''
+if G.GAME.modifiers.impy_close_to_target or 
+    (not G.GAME.modifiers.impy_close_to_target 
+     and G.GAME.chips - G.GAME.blind.chips >= 0) 
+then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if game_won and not G.GAME.win_notified then"
+position = "before"
+payload = '''
+if game_won and G.GAME.modifiers.impy_close_to_target then
+    local actual = G.GAME.chips
+    local target = G.GAME.blind.chips
+    local player_score = math.abs(actual - target) / target * 100
+    sendDebugMessage(string.format("%.2f", player_score))
+end
+'''
+match_indent = true

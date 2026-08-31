@@ -11,9 +11,9 @@ SMODS.Challenge {
     rules = {
         custom = {
             { id = "impy_single_blind" },
-            { id = "impy_exact_score" },
+            { id = "impy_close_to_target" },
             { id = "impy_single_ante", no_ui = true },
-            { id = "impy_final_score", no_ui = true },
+            { id = "impy_calculated_score", no_ui = true },
         },
         modifiers = {
             { id = "hands", value = 1 },

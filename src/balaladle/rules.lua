@@ -26,8 +26,8 @@ local blind_ref = Blind.set_blind
 function Blind:set_blind(blind, reset, silent)
     blind_ref(self, blind, reset, silent)
 
-    if blind and G.GAME.modifiers.impy_final_score then
-        local score = daily_score.get_score()
+    if blind and G.GAME.modifiers.impy_calculated_score then
+        local score = daily_score.get_calculated_score()
         self.chips = score
         self.chip_text = number_format(score)
     end
