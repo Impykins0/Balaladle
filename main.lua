@@ -1,6 +1,7 @@
 BALALADLE = BALALADLE or {}
 BALALADLE.UTILS = BALALADLE.UTILS or {}
 BALALADLE.CORE = BALALADLE.CORE or {}
+BALALADLE.UI = BALALADLE.UI or {}
 
 local dependencies = {
     "DVSimulation/src/Init",
@@ -30,7 +31,8 @@ local modules = {
     "src/balaladle/blind",
     "src/balaladle/challenge",
     "src/balaladle/rules",
-    "ui/menu"
+    "ui/menu",
+    "ui/leaderboard",
 }
 
 for _, file_path in ipairs(modules) do

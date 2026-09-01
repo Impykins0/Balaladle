@@ -7,5 +7,5 @@
   "prefix": "impy",
   "dependencies": ["Steamodded (>=1.0.0~ALPHA-0812d)"],
   "main_file": "main.lua",
-  "version": "0.0.1"
+  "version": "0.8.0"
 }

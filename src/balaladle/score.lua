@@ -71,12 +71,17 @@ if not BALALADLE.CORE.SCORE.get_calculated_score then
     function BALALADLE.CORE.SCORE.get_calculated_score()
         if not BALALADLE.CORE.SCORE.calculated_score then
             local winning_hand = daily_deck.get_winning_hand()
-            local other_cards = 
+            local other_cards =
                 misc_utils.slice(daily_deck.get_other_cards(), 1, 5)
             BALALADLE.CORE.SCORE.calculated_score = 
                 simulate_cards(winning_hand, other_cards)
         end
 
         return BALALADLE.CORE.SCORE.calculated_score
+    end
+
+    function BALALADLE.CORE.SCORE.set_player_score(target, actual)
+        BALALADLE.CORE.SCORE.player_score =
+            (math.abs(actual - target) / target) * 100
     end
 end

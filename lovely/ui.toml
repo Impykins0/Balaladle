@@ -72,3 +72,20 @@ payload = '''
 }
 '''
 match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "functions/UI_definitions.lua"
+pattern = '''(?<indent>[\t ]*)\{n=G\.UIT\.C, config=\{align = "cm", padding = 0\.1\}, nodes=\{t\.nodes\[1\]\}\r?\n[\t ]*\}'''
+position = "at"
+payload = '''
+{n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={t.nodes[1]}},
+{n=G.UIT.C, config={align = "cm", padding = 0.1}, nodes={
+        G.GAME.modifiers.impy_leaderboard
+            and BALALADLE.UI.create_UIBox_balaladle_leaderboard()
+            or nil,
+    }
+}
+'''
+line_prepend = "$indent"
+times = 1

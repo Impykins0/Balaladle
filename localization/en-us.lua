@@ -13,6 +13,8 @@ return {
         dictionary = {
             b_impy_daily_1 = "Balaladle",
             ph_impy_close_to_target = "Score CLOSEST TO",
+            ph_impy_leaderboard = "Leaderboard",
+            ph_impy_percent_diff = "(% DIFFERENCE FROM TARGET)",
         },
         challenge_names = {
             c_impy_daily_1 = "Balaladle"

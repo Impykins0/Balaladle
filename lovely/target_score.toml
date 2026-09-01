@@ -24,8 +24,7 @@ payload = '''
 if game_won and G.GAME.modifiers.impy_close_to_target then
     local actual = G.GAME.chips
     local target = G.GAME.blind.chips
-    local player_score = math.abs(actual - target) / target * 100
-    sendDebugMessage(string.format("%.2f", player_score))
+    BALALADLE.CORE.SCORE.set_player_score(target, actual)
 end
 '''
 match_indent = true
