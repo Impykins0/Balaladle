@@ -36,9 +36,7 @@ SMODS.Challenge {
     apply = function()
         G.E_MANAGER:add_event(Event({
             func = function()
-                -- daily_deck.set_editions_and_seals()
                 G.GAME.round_resets.blind_choices.Boss = "bl_impy_blank"
-
                 return true
             end
         }))

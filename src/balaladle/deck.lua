@@ -450,26 +450,11 @@ if not BALALADLE.CORE.DECK.starter_deck then
     function BALALADLE.CORE.DECK.starter_deck(size)
         if not BALALADLE.CORE.DECK.deck then
             local wh_type, hh_type = generate_hand_types()
-            sendDebugMessage(wh_type .. " + " .. hh_type, "BALALADLE")
             BALALADLE.CORE.DECK.deck = generate_deck(wh_type, hh_type, size)
         end
 
         return BALALADLE.CORE.DECK.deck
     end
-
-    -- function BALALADLE.CORE.DECK.set_editions_and_seals()
-    --     for _, card in ipairs(G.playing_cards) do
-    --         local rand_ed = misc_utils.random_select(EDITIONS, "edition")
-    --         local rand_seal = misc_utils.random_select(SEALS, "seal")
-
-    --         if rand_ed then
-    --             card:set_edition(rand_ed, true, true)
-    --         end
-    --         if rand_seal then
-    --             card:set_seal(rand_seal, true, true)
-    --         end
-    --     end
-    -- end
 
     function BALALADLE.CORE.DECK.get_winning_hand()
         local winning_hand = {}
