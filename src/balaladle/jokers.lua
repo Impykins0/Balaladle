@@ -141,13 +141,9 @@ local function generate_jokers(amount)
     end
 
     for _, joker in pairs(G.P_CENTER_POOLS.Joker) do
-        if joker.mod or not joker.unlocked or banned_table[joker.key] then
-            goto continue
+        if not (joker.mod or not joker.unlocked or banned_table[joker.key]) then
+            pool[#pool + 1] = joker.key
         end
-
-        pool[#pool + 1] = joker.key
-
-        ::continue::
     end
 
     for _ = 1, math.min(amount, #pool) do
