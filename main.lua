@@ -2,6 +2,7 @@ BALALADLE = BALALADLE or {}
 BALALADLE.UTILS = BALALADLE.UTILS or {}
 BALALADLE.CORE = BALALADLE.CORE or {}
 BALALADLE.UI = BALALADLE.UI or {}
+BALALADLE.NETWORK = BALALADLE.NETWORK or {}
 
 local dependencies = {
     "DVSimulation/src/Init",
@@ -36,5 +37,14 @@ local modules = {
 }
 
 for _, file_path in ipairs(modules) do
+    assert(SMODS.load_file(file_path .. ".lua"))()
+end
+
+local network = {
+    "network/client",
+    "network/init",
+}
+
+for _, file_path in ipairs(network) do
     assert(SMODS.load_file(file_path .. ".lua"))()
 end
