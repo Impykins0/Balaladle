@@ -38,6 +38,7 @@ local modules = {
     "src/balaladle/jokers",
     "src/balaladle/deck",
     "src/balaladle/score",
+    "src/balaladle/leaderboard",
     "src/balaladle/blind",
     "src/balaladle/challenge",
     "src/balaladle/rules",

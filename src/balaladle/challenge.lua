@@ -12,6 +12,7 @@ SMODS.Challenge {
         custom = {
             { id = "impy_single_blind" },
             { id = "impy_close_to_target" },
+            { id = "impy_friends_leaderboard" },
             { id = "impy_single_ante", no_ui = true },
             { id = "impy_calculated_score", no_ui = true },
             { id = "impy_leaderboard", no_ui = true },
@@ -37,6 +38,9 @@ SMODS.Challenge {
         G.E_MANAGER:add_event(Event({
             func = function()
                 G.GAME.round_resets.blind_choices.Boss = "bl_impy_blank"
+                BALALADLE.UI.set_leaderboard(
+                    BALALADLE.UI.create_UIBox_balaladle_leaderboard()
+                )
                 return true
             end
         }))
