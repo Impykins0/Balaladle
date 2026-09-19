@@ -21,10 +21,21 @@ function Game:start_run(args)
     }))
 end
 
--- Calculate exact blind score
+-- Calculate exact blind score and undo multiplayer mod glass card nerf, 
+-- if applicable
 local blind_ref = Blind.set_blind
 function Blind:set_blind(blind, reset, silent)
     blind_ref(self, blind, reset, silent)
+
+    if SMODS.Mods["Multiplayer"] and SMODS.Mods["Multiplayer"].can_load
+       and G.GAME.modifiers.impy_calculated_score then
+        for _, card in ipairs(G.playing_cards) do
+            if card.config.center_key == "m_glass" then
+                card.ability.x_mult = 2
+                card.ability.mp_sticker_balanced = false
+            end
+        end
+    end
 
     if blind and G.GAME.modifiers.impy_calculated_score then
         local score = daily_score.get_calculated_score()

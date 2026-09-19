@@ -26,6 +26,9 @@ return {
             ch_c_impy_close_to_target = {
                 "Match the blind score {C:attention}as closely as possible{}",
             },
+            ch_c_impy_friends_leaderboard = {
+                "{C:attention}Compete with friends{} on the local leaderboard",
+            },
         },
     }
 }
