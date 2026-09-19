@@ -13,12 +13,3 @@ if not BALALADLE.NETWORK.is_init then
         return result
     end
 end
-
--- Test API call
-BALALADLE.NETWORK.get("/test", function(ok, data)
-    if not ok then
-        sendDebugMessage("Test failed", "BALALADLE")
-    else
-        sendDebugMessage(data.message, "BALALADLE")
-    end
-end)

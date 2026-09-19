@@ -25,6 +25,15 @@ for _, file_path in ipairs(utils) do
     assert(SMODS.load_file(file_path .. ".lua"))()
 end
 
+local network = {
+    "network/client",
+    "network/init",
+}
+
+for _, file_path in ipairs(network) do
+    assert(SMODS.load_file(file_path .. ".lua"))()
+end
+
 local modules = {
     "src/balaladle/jokers",
     "src/balaladle/deck",
@@ -37,14 +46,5 @@ local modules = {
 }
 
 for _, file_path in ipairs(modules) do
-    assert(SMODS.load_file(file_path .. ".lua"))()
-end
-
-local network = {
-    "network/client",
-    "network/init",
-}
-
-for _, file_path in ipairs(network) do
     assert(SMODS.load_file(file_path .. ".lua"))()
 end

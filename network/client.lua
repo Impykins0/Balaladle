@@ -3,9 +3,9 @@ local THREAD = assert(SMODS.load_file("network/thread.lua"))()
 
 local DEBUG = true
 
-local function try_call(callback, err, data)
+local function try_call(callback, err, status, data)
     if callback then
-        callback(err == nil, data)
+        callback(err == nil, status, data)
     end
 
     if DEBUG and err then
@@ -17,7 +17,7 @@ local function request(method, path, data, callback)
     if not BALALADLE.NETWORK.thread then return end
 
     if BALALADLE.NETWORK.disabled then
-        try_call(callback, "Could not establish connection to the server.")
+        try_call(callback, "Could not establish connection to the server.", 500)
         return
     end
 
@@ -36,8 +36,10 @@ if not BALALADLE.NETWORK.init then
     function BALALADLE.NETWORK.init(base_url)
         if BALALADLE.NETWORK.thread then return end
 
-        BALALADLE.NETWORK.req_channel = love.thread.getChannel("req_channel")
-        BALALADLE.NETWORK.res_channel = love.thread.getChannel("res_channel")
+        BALALADLE.NETWORK.req_channel =
+            love.thread.getChannel("impy_req_channel")
+        BALALADLE.NETWORK.res_channel =
+            love.thread.getChannel("impy_res_channel")
 
         BALALADLE.NETWORK.base_url = base_url:gsub("/+$", "")
         BALALADLE.NETWORK.id = 0
@@ -67,7 +69,7 @@ if not BALALADLE.NETWORK.init then
                 BALALADLE.NETWORK.pending = {}
 
                 for _, callback in pairs(pending) do
-                    try_call(callback, res.error)
+                    try_call(callback, res.error, 500)
                 end
             else
                 local callback = BALALADLE.NETWORK.pending[res.id]
@@ -88,7 +90,7 @@ if not BALALADLE.NETWORK.init then
                     end
                 end
 
-                try_call(callback, err, data)
+                try_call(callback, err, res.status, data)
             end
         end
     end

@@ -2,8 +2,8 @@ return [[
     require("love.filesystem")
     local ok, https = pcall(require, "https")
 
-    local req_channel = love.thread.getChannel("req_channel")
-    local res_channel = love.thread.getChannel("res_channel")
+    local req_channel = love.thread.getChannel("impy_req_channel")
+    local res_channel = love.thread.getChannel("impy_res_channel")
 
     if not ok then
         res_channel:push({
