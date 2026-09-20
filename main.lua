@@ -44,6 +44,7 @@ local modules = {
     "src/balaladle/rules",
     "ui/menu",
     "ui/leaderboard",
+    "ui/win_screen",
 }
 
 for _, file_path in ipairs(modules) do

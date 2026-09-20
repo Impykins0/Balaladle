@@ -34,7 +34,9 @@ if not BALALADLE.UTILS.UI.get_challenge_index then
     end
 
     function BALALADLE.UTILS.UI.format_score(score)
-        if score < 10 then
+        if not score then
+            return "N/A"
+        elseif score < 10 then
             return string.format("%.3f", score)
         elseif score < 100 then
             return string.format("%.2f", score)

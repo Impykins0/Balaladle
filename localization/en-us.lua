@@ -12,6 +12,9 @@ return {
     misc = {
         dictionary = {
             b_impy_daily_1 = "Balaladle",
+            b_impy_share_score = "Share Score",
+            b_impy_copied_to_clipboard = "Copied to clipboard!",
+            b_impy_attempt_score = "Balaladle Score",
             ph_impy_close_to_target = "Score CLOSEST TO",
             ph_impy_leaderboard = "Leaderboard",
             ph_impy_percent_diff = "(% DIFFERENCE FROM TARGET)",

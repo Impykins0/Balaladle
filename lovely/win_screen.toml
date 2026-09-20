@@ -1,0 +1,68 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '{n=G.UIT.R, config={align = "cm", minh = 0.4, minw = 0.1}, nodes={}},'
+position = "at"
+payload = '''
+{n=G.UIT.R, config={
+    align = "cm", 
+    minh = G.GAME.modifiers.impy_share_score and 0.05 or 0.4, 
+    minw = 0.1}, 
+    nodes={}
+},
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = 'not show_win_cta and {n=G.UIT.R, config={align = "cm", minh = 0.2, minw = 0.1}, nodes={}} or nil,'
+position = "at"
+payload = '''
+not show_win_cta and {n=G.UIT.R, config={
+        align = "cm", 
+        minh = G.GAME.modifiers.impy_share_score and 0 or 0.2, 
+        minw = 0.1
+    }, 
+    nodes={}
+} or nil,
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "not show_win_cta and UIBox_button({button = 'go_to_menu', label = {localize('b_main_menu')}, minw = 2.5, maxw = 2.5, minh = 1, focus_args = {nav = 'wide'}}) or nil,"
+position = "after"
+payload = '''
+not show_win_cta and G.GAME.modifiers.impy_share_score and {n=G.UIT.R, config={
+    align = "cm", minh = 0, minw = 0.1}, nodes={}
+} or nil,
+not show_win_cta and G.GAME.modifiers.impy_share_score and UIBox_button({
+    button = "impy_share_score",
+    label = { localize("b_impy_share_score") },
+    colour = G.C.BLUE,
+    minw = 2.5,
+    maxw = 2.5,
+    minh = 1,
+    focus_args = { nav = "wide" }
+}) or nil,
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "create_UIBox_round_scores_row('hand'),"
+position = "at"
+payload = '''
+G.GAME.modifiers.impy_leaderboard
+    and BALALADLE.UI.create_attempt_score_row()
+    or create_UIBox_round_scores_row('hand'),
+'''
+match_indent = true
+times = 1
