@@ -36,6 +36,8 @@ end
 
 local modules = {
     "src/balaladle/jokers",
+    "src/balaladle/consumables",
+    "src/balaladle/consumable_handlers",
     "src/balaladle/deck",
     "src/balaladle/score",
     "src/balaladle/leaderboard",

@@ -312,11 +312,11 @@ local function generate_card(args)
     args = args or {}
 
     return {
-        s = args.s or misc_utils.random_select(SUITS, "suit"),
-        r = args.r or misc_utils.random_select(RANKS, "rank"),
-        e = misc_utils.random_select(ENHANCEMENTS, "enhancement") or nil,
-        d = misc_utils.random_select(EDITIONS, "edition") or nil,
-        g = misc_utils.random_select(SEALS, "seal") or nil,
+        s = args.s or misc_utils.random_select(SUITS, "card_suit"),
+        r = args.r or misc_utils.random_select(RANKS, "card_rank"),
+        e = misc_utils.random_select(ENHANCEMENTS, "card_enhancement") or nil,
+        d = misc_utils.random_select(EDITIONS, "card_edition") or nil,
+        g = misc_utils.random_select(SEALS, "card_seal") or nil,
     }
 end
 

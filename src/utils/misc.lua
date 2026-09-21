@@ -97,4 +97,29 @@ if not BALALADLE.UTILS.MISC.random_select then
 
         return BALALADLE.UTILS.MISC.random_select(available, key)
     end
+
+    function BALALADLE.UTILS.MISC.random_select_multi(table, amount, key)
+        if amount < 1 then
+            return {}
+        elseif amount == 1 then
+            return { BALALADLE.UTILS.MISC.random_select(table, key) }
+        end
+
+        local shuffled = BALALADLE.UTILS.MISC.shuffle(table, key)
+        return BALALADLE.UTILS.MISC.slice(shuffled, 1, amount)
+    end
+
+    function BALALADLE.UTILS.MISC.merge(table1, table2)
+        local result = {}
+
+        for i = 1, #table1 do
+            result[#result + 1] = table1[i]
+        end
+
+        for i = 1, #table2 do
+            result[#result + 1] = table2[i]
+        end
+
+        return result
+    end
 end

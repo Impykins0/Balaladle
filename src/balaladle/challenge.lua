@@ -1,9 +1,14 @@
 local daily_jokers = BALALADLE.CORE.JOKERS
 local daily_deck = BALALADLE.CORE.DECK
+local daily_consumables = BALALADLE.CORE.CONSUMABLES
+local misc_utils = BALALADLE.UTILS.MISC
 
 local starter_jokers = daily_jokers.get_jokers(5)
 local starter_deck = daily_deck.starter_deck(8)
+local starter_consumables = daily_consumables.get_consumables()
+
 local banned_jokers = daily_jokers.get_banned_jokers()
+local banned_consumables = daily_consumables.get_banned_consumables()
 
 SMODS.Challenge {
     key = 'daily_1',
@@ -21,10 +26,13 @@ SMODS.Challenge {
         modifiers = {
             { id = "hands", value = 1 },
             { id = "discards", value = 0 },
+            { id = "consumable_slots", value = 3},
         },
     },
 
     jokers = starter_jokers,
+
+    consumeables = starter_consumables,
 
     deck = {
         type = "Challenge Deck",
@@ -32,7 +40,7 @@ SMODS.Challenge {
     },
 
     restrictions = {
-        banned_cards = banned_jokers,
+        banned_cards = misc_utils.merge(banned_jokers, banned_consumables),
     },
 
     apply = function()
