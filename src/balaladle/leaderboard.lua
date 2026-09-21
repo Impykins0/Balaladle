@@ -1,5 +1,9 @@
 BALALADLE.CORE.LEADERBOARD = BALALADLE.CORE.LEADERBOARD or {}
 
+local source_dir = love.filesystem.getSourceBaseDirectory()
+package.cpath = source_dir .. "/?." .. 
+    (love.system.getOS() == "Windows" and "dll" or "so") .. ";" .. package.cpath
+
 local luasteam = require("luasteam")
 local player_id = ""
 if luasteam.init() then
