@@ -23,6 +23,14 @@ G.FUNCS.start_challenge_run = function(e)
 end
 
 G.FUNCS.daily_start_1 = function(e)
+    if MP then
+        MP.LOBBY.config.ruleset = nil
+        MP.LOBBY.config.gamemode = nil
+        MP.SP.ruleset = nil
+        MP.SP.practice = false
+        MP.GHOST.clear()
+    end
+
     G.FUNCS.start_challenge_run({
         config = {
             id = ui_utils.get_challenge_index("c_impy_daily_1"),
@@ -30,11 +38,9 @@ G.FUNCS.daily_start_1 = function(e)
     })
 end
 
-if SMODS.Mods["Multiplayer"] and SMODS.Mods["Multiplayer"].can_load
-   and G.UIDEF.override_main_menu_play_button and G.FUNCS.play_options then
-    sendDebugMessage("Multiplayer compatibility detected", "BALALADLE")
-
+local function create_mp_ui()
     local ui_ref = G.UIDEF.override_main_menu_play_button
+
     function G.UIDEF.override_main_menu_play_button()
         local ui = ui_ref()
 
@@ -44,24 +50,50 @@ if SMODS.Mods["Multiplayer"] and SMODS.Mods["Multiplayer"].can_load
         end
 
         local buttons = ui.nodes[1].nodes[1].nodes[1].nodes
+
         for i, button in ipairs(buttons) do
-            if button.nodes
-               and button.nodes[1].config.button == "start_vanilla_sp" then
-                table.insert(buttons, i + 1,
-                    UIBox_button({
-                        label = { localize("b_impy_daily_1") },
-                        colour = G.C.RED,
-                        button = "daily_start_1",
-                        minw = 5,
-                    })
-                )
+            local button_config =
+                button.nodes
+                and button.nodes[1]
+                and button.nodes[1].config
+
+            if button_config
+               and button_config.button == "start_vanilla_sp" then
+                table.insert(buttons, i + 1, UIBox_button({
+                    label = { localize("b_impy_daily_1") },
+                    colour = G.C.RED,
+                    button = "daily_start_1",
+                    minw = 5,
+                }))
+
+                break
             end
         end
 
         return ui
     end
-else
-    sendDebugMessage("Multiplayer compatibility not detected", "BALALADLE")
-
-    -- TODO: UI that doesn't depend on multiplayer mod
 end
+
+local function create_non_mp_ui()
+
+end
+
+local function check_for_multiplayer()
+    if not SMODS.Mods["Multiplayer"]
+       or not SMODS.Mods["Multiplayer"].can_load then
+        sendDebugMessage("Multiplayer compatibility not detected", "BALALADLE")
+        create_non_mp_ui()
+
+        return true
+    end
+
+    sendDebugMessage("Multiplayer compatibility detected", "BALALADLE")
+    create_mp_ui()
+
+    return true
+end
+
+G.E_MANAGER:add_event(Event({
+    trigger = "immediate",
+    func = check_for_multiplayer,
+}))
