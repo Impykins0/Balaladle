@@ -140,7 +140,7 @@ local function generate_jokers(amount)
         banned_table[card.id] = true
     end
 
-    for _, joker in pairs(G.P_CENTER_POOLS.Joker) do
+    for _, joker in ipairs(G.P_CENTER_POOLS.Joker) do
         if not (joker.mod or not joker.unlocked or banned_table[joker.key]) then
             pool[#pool + 1] = joker.key
         end

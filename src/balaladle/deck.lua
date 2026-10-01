@@ -276,10 +276,10 @@ local HAND_STRENGTH = {
 
 local function generate_hand_types()
     local winning_hand_type = misc_utils.random_select(
-        misc_utils.get_keys(HAND_COMPAT), "hand_type"
+        misc_utils.get_keys(HAND_COMPAT), "winning_hand_type"
     )
     local herring_hand_type = misc_utils.random_select(
-        HAND_COMPAT[winning_hand_type], "hand_type"
+        HAND_COMPAT[winning_hand_type], "herring_hand_type"
     )
     return winning_hand_type, herring_hand_type
 end

@@ -1,7 +1,7 @@
 BALALADLE.UTILS.MISC = BALALADLE.UTILS.MISC or {}
 local daily_utils = BALALADLE.UTILS.DAILY
 
-local counter = 0
+local seed_counters = {}
 
 if not BALALADLE.UTILS.MISC.random_select then
     function BALALADLE.UTILS.MISC.random_select(table, key)
@@ -9,12 +9,16 @@ if not BALALADLE.UTILS.MISC.random_select then
             return nil
         end
 
-        counter = counter + 1
+        if not seed_counters[key] then
+            seed_counters[key] = 1
+        else
+            seed_counters[key] = seed_counters[key] + 1
+        end
 
         return pseudorandom_element(
             table,
             pseudoseed(
-                "impy_" .. key .. "_" .. tostring(counter),
+                "impy_" .. key .. "_" .. tostring(seed_counters[key]),
                 daily_utils.get_seed()
             )
         )
@@ -27,16 +31,20 @@ if not BALALADLE.UTILS.MISC.random_select then
 
         local shuffled = {}
 
-        for _, v in pairs(table) do
+        for _, v in ipairs(table) do
             shuffled[#shuffled + 1] = v
         end
 
-        counter = counter + 1
+        if not seed_counters[key] then
+            seed_counters[key] = 1
+        else
+            seed_counters[key] = seed_counters[key] + 1
+        end
 
         pseudoshuffle(
             shuffled,
             pseudoseed(
-                "impy_" .. key .. "_" .. tostring(counter),
+                "impy_" .. key .. "_" .. tostring(seed_counters[key]),
                 daily_utils.get_seed()
             )
         )
@@ -51,6 +59,10 @@ if not BALALADLE.UTILS.MISC.random_select then
             keys[#keys + 1] = key
         end
 
+        table.sort(keys, function(a, b)
+            return tostring(a) < tostring(b)
+        end)
+
         return keys
     end
 
@@ -59,7 +71,7 @@ if not BALALADLE.UTILS.MISC.random_select then
             return false
         end
 
-        for _, v in pairs(table) do
+        for _, v in ipairs(table) do
             if v == value then
                 return true
             end
@@ -89,7 +101,7 @@ if not BALALADLE.UTILS.MISC.random_select then
 
         local available = {}
 
-        for _, v in pairs(table) do
+        for _, v in ipairs(table) do
             if not BALALADLE.UTILS.MISC.contains(excluded, v) then
                 available[#available + 1] = v
             end

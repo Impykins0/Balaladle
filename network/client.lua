@@ -68,7 +68,7 @@ if not BALALADLE.NETWORK.init then
                 local pending = BALALADLE.NETWORK.pending
                 BALALADLE.NETWORK.pending = {}
 
-                for _, callback in pairs(pending) do
+                for _, callback in ipairs(pending) do
                     try_call(callback, res.error, 500)
                 end
             else
