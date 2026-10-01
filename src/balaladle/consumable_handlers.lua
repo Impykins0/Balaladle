@@ -222,6 +222,8 @@ function BALALADLE.CORE.CONSUMABLES.sim_consumables(winning_hand, other_cards)
     local all_cards = misc_utils.merge(winning_hand, other_cards)
     local consumables = misc_utils.shuffle(G.consumeables.cards, "consumables")
 
+    local random_values = {0, 1, 1, 1, 1}
+
     local state = {
         key = nil,
         consumable = nil,
@@ -234,10 +236,12 @@ function BALALADLE.CORE.CONSUMABLES.sim_consumables(winning_hand, other_cards)
     }
 
     for _, consumable in ipairs(consumables) do
-        state.key = consumable.config.center.key
-        state.consumable = consumable
+        if misc_utils.random_select(random_values, "eighty_twenty") == 1 then
+            state.key = consumable.config.center.key
+            state.consumable = consumable
 
-        sim_handler(state)
+            sim_handler(state)
+        end
     end
 
     return state
