@@ -10,6 +10,14 @@ G.FUNCS.start_challenge_run = function(e)
             G.FUNCS.exit_overlay_menu()
         end
 
+        if MP then
+            MP.LOBBY.config.ruleset = nil
+            MP.LOBBY.config.gamemode = nil
+            MP.SP.ruleset = nil
+            MP.SP.practice = false
+            MP.GHOST.clear()
+        end
+
         G.FUNCS.start_run(e, {
             stake = 1,
             seed = daily_utils.get_seed(),
@@ -23,14 +31,6 @@ G.FUNCS.start_challenge_run = function(e)
 end
 
 G.FUNCS.daily_start_1 = function(e)
-    if MP then
-        MP.LOBBY.config.ruleset = nil
-        MP.LOBBY.config.gamemode = nil
-        MP.SP.ruleset = nil
-        MP.SP.practice = false
-        MP.GHOST.clear()
-    end
-
     G.FUNCS.start_challenge_run({
         config = {
             id = ui_utils.get_challenge_index("c_impy_daily_1"),
