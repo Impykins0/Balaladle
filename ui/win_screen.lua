@@ -116,7 +116,7 @@ local function generate_clipboard_text(score)
     local score_text = BALALADLE.UTILS.UI.format_score(score)
 
     return "Balaladle " .. tostring(os.date("!%m-%d-%Y")) .. "\n" ..
-           score_text .. "% difference from target score\n\n" ..
+           score_text .. "% difference from target score\n" ..
            generate_emojis(score)
 end
 
