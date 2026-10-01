@@ -38,6 +38,44 @@ G.FUNCS.daily_start_1 = function(e)
     })
 end
 
+function G.FUNCS.go_to_balaladle()
+    local id = ui_utils.get_challenge_index("c_impy_daily_1")
+    G.FUNCS.challenge_list({config = {}})
+
+    local back_button =
+        G.OVERLAY_MENU.UIRoot.children[1].children[1].children[2]
+    back_button.config.button = "exit_overlay_menu"
+
+    G.E_MANAGER:add_event(Event({
+        trigger = "after",
+        delay = 0.15,
+        func = function()
+            local page = math.floor((id - 1) / G.CHALLENGE_PAGE_SIZE) + 1
+            local challenge_page =
+                G.OVERLAY_MENU:get_UIE_by_ID("challenge_page")
+            local cycle = challenge_page.children[1].config.ref_table
+
+            cycle.current_option = page
+            cycle.current_option_val = cycle.options[page]
+
+            G.FUNCS.change_challenge_list_page({
+                cycle_config = cycle
+            })
+
+            local challenge_list =
+                G.OVERLAY_MENU:get_UIE_by_ID("challenge_list")
+            local challenge_button =
+                challenge_list.config.object:get_UIE_by_ID(id)
+
+            if challenge_button then
+                G.FUNCS.change_challenge_description(challenge_button)
+            end
+
+            return true
+        end
+    }))
+end
+
 local function create_mp_ui()
     local ui_ref = G.UIDEF.override_main_menu_play_button
 
@@ -62,7 +100,7 @@ local function create_mp_ui()
                 table.insert(buttons, i + 1, UIBox_button({
                     label = { localize("b_impy_daily_1") },
                     colour = G.C.RED,
-                    button = "daily_start_1",
+                    button = "go_to_balaladle",
                     minw = 5,
                 }))
 
@@ -75,7 +113,32 @@ local function create_mp_ui()
 end
 
 local function create_non_mp_ui()
+    local ui_ref = G.UIDEF.run_setup
 
+    function G.UIDEF.run_setup(from_game_over)
+        local ui = ui_ref(from_game_over)
+
+        if not G.SETTINGS.tutorial_complete
+            or G.SETTINGS.tutorial_progress ~= nil then
+            return ui
+        end
+
+        local contents = ui.nodes[1].nodes[1].nodes[1]
+        local tabs = contents.nodes[1].nodes[1]
+        local tab_buttons = tabs.nodes[1].nodes[2]
+
+        table.insert(tab_buttons.nodes, UIBox_button({
+            label = { localize("b_impy_daily_1") },
+            colour = G.C.RED,
+            button = "go_to_balaladle",
+            minw = 2.5,
+            minh = 0.8,
+            col = true,
+            focus_args = {type = "none"},
+        }))
+
+        return ui
+    end
 end
 
 local function check_for_multiplayer()
