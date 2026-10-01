@@ -26,7 +26,6 @@ if game_won and G.GAME.modifiers.impy_close_to_target then
     local target = G.GAME.blind.chips
     BALALADLE.CORE.SCORE.set_player_score(target, actual)
     BALALADLE.CORE.LEADERBOARD.submit(BALALADLE.CORE.SCORE.player_score)
-    BALALADLE.CORE.LEADERBOARD.load()
 end
 '''
 match_indent = true

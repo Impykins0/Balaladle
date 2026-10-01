@@ -26,6 +26,7 @@ if not BALALADLE.CORE.LEADERBOARD.submit then
                 )
             else
                 sendDebugMessage("Balaladle score submitted!", "BALALADLE")
+                BALALADLE.CORE.LEADERBOARD.load()
             end
         end)
     end
