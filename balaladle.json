@@ -5,7 +5,10 @@
   "description": "",
   "priority": 0,
   "prefix": "impy",
-  "dependencies": ["Steamodded (>=1.0.0~ALPHA-0812d)"],
+  "dependencies": [
+    "Steamodded (>=1.0.0~ALPHA-0812d)",
+    "Lovely (>=0.9)"
+  ],
   "main_file": "main.lua",
   "version": "1.0.0"
 }
