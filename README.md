@@ -131,4 +131,5 @@ The repository also includes an unmodified copy of
   [Balatro Multiplayer Mod](https://github.com/Balatro-Multiplayer/BalatroMultiplayer) 
   for inspiring Balaladle's networking approach and its integration with the Multiplayer Mod's
   main-menu interface
+- **@justabeanie on Discord** for the original mod idea and emotional support!
 - Everyone who has tested Balaladle, reported bugs, or shared feedback
