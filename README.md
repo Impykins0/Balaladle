@@ -56,8 +56,7 @@ Thus, lower scores are better. Try to get a Balaladle Score of `0%`!
 ## How to Play
 
 > [!IMPORTANT]
-> For the daily challenge to generate properly, your current profile must have everything unlocked. 
-  <br>
+> For the daily challenge to generate properly, your current profile must have everything unlocked. <br>
 > To unlock everything, select **Profile** from the main menu, select your desired profile, 
   then select **Unlock all**.
 
